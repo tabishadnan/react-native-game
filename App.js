@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import StartGame from './components/StartGame';
 import Game from './components/Game';
 import GameForm from './components/GameForm';
 import Header from './components/Header';
+import GameOver from './components/GameOver';
 
 export default function App() {
 
@@ -14,13 +15,30 @@ export default function App() {
 
   const [isStartGame, setStartGame] = useState(false);
 
+  const [number, setNumber] = useState(null);
+
+  const [counter, setCounter] = useState(0);
+
+  const [isGameOver, setGameOver] = useState(false);
+
   const handleChange = (inputVal) => {
     setVal(inputVal);
   };
 
   const resetinputVal = () => {
     setVal("");
-  }
+  };
+
+  const genRandNum = (sign) => {
+    setCounter(counter + 1);
+    let num = Math.floor(Math.random() * 99);
+      setNumber(num);
+    if(sign === "-"){
+      console.log("you press -",number);
+    }else {
+      console.log("you press +");
+    }
+  };
 
   return (
     <View>
@@ -34,7 +52,9 @@ export default function App() {
       />
       {!!isConfirm && <Game value={value} setStartGame={setStartGame} />}
 
-      {!!isStartGame && <StartGame value={value} />}
+      {!!isStartGame && <StartGame value={value} number={number} number={number} genRandNum={genRandNum} />}
+
+      {!!isGameOver && <GameOver gameOver={gameOver} />}
 
     </View>
   );

@@ -1,20 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Game = ({ value, number, genRandNum }) => {
+const GameOver = ({ gameOver }) => {
     return (
         <View>
-            <Text style={styles.title}>Opponent's Guess</Text>
-            <View>
+            <Text style={styles.title}>Game Over</Text>
+            {/* <View>
                 <Text style={styles.title}>{value}</Text>
             </View>
             <View style={styles.sgmebtnwrapper}>
                 <View style={styles.sgamebtn}>
-                    <Icon onPress={() => genRandNum("-")} name="minus" size={20} color="#fff" />
+                    <Icon onPress={genRandNum} name="minus" size={20} color="#fff" />
                 </View>
                 <View style={styles.sgamebtn}>
-                    <Icon onPress={() => genRandNum("+")} name="plus" size={20} color="#fff" />
+                    <Icon onPress={genRandNum} name="plus" size={20} color="#fff" />
                 </View>
             </View>
             <View>
@@ -25,7 +25,7 @@ const Game = ({ value, number, genRandNum }) => {
                         {data.item.number}
                     </Text>}
                 />
-            </View>
+            </View> */}
         </View>
     );
 };
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Game;
+export default GameOver;
