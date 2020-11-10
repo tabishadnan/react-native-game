@@ -15,7 +15,7 @@ export default function App() {
 
   const [isStartGame, setStartGame] = useState(false);
 
-  const [number, setNumber] = useState(null);
+  const [number, setNumber] = useState([]);
 
   const [counter, setCounter] = useState(0);
 
@@ -31,14 +31,19 @@ export default function App() {
 
   const genRandNum = (sign) => {
     setCounter(counter + 1);
-    let num = Math.floor(Math.random() * 99);
-      setNumber(num);
-    if(sign === "-"){
-      console.log("you press -",number);
-    }else {
+    if (sign === "-") {
+      console.log("you press -");
+    } else {
       console.log("you press +");
     }
   };
+
+  useEffect(() => {
+    if (isStartGame) {
+      let num = Math.floor(Math.random() * 99);
+      setNumber([{ counter: counter, number: num }]);
+    }
+  }, [counter]);
 
   return (
     <View>

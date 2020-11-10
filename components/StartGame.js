@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Game = ({ value, number, genRandNum }) => {
+
     return (
         <View>
             <Text style={styles.title}>Opponent's Guess</Text>
