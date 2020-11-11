@@ -2,29 +2,40 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Game = ({ value, number, genRandNum }) => {
+const Game = ({ userNum, number, userGuessNum, setSign}) => {
 
     return (
         <View>
             <Text style={styles.title}>Opponent's Guess</Text>
             <View>
-                <Text style={styles.title}>{value}</Text>
+                <Text style={styles.title}>{number}</Text>
             </View>
             <View style={styles.sgmebtnwrapper}>
                 <View style={styles.sgamebtn}>
-                    <Icon onPress={() => genRandNum("-")} name="minus" size={20} color="#fff" />
+                    <Icon onPress={() => {
+                        userGuessNum();
+                        setSign("-");
+                    }} name="minus" size={20} color="#fff" />
                 </View>
                 <View style={styles.sgamebtn}>
-                    <Icon onPress={() => genRandNum("+")} name="plus" size={20} color="#fff" />
+                    <Icon onPress={() => {
+                        userGuessNum();
+                        setSign("+");
+                    }} name="plus" size={20} color="#fff" />
                 </View>
             </View>
             <View>
                 <FlatList
-                    data={number}
-                    keyExtractor={(item, index) => item.number.toString()}
-                    renderItem={(data) => <Text>
-                        {data.item.number}
-                    </Text>}
+                    data={userNum}
+                    keyExtractor={(item, index) => item.userNum.toString()}
+                    renderItem={(data) => <View style={styles.listwrapper}>
+                        <Text>
+                        #{data.item.index}
+                    </Text>
+                    <Text>
+                        {data.item.userNum}
+                    </Text>
+                    </View>}
                 />
             </View>
         </View>
@@ -49,6 +60,12 @@ const styles = StyleSheet.create({
         backgroundColor: "teal",
         paddingHorizontal: 45,
         paddingVertical: 8
+    },
+    listwrapper: {
+        flexDirection: "row",
+        justifyContent:"space-evenly",
+        alignItems:"center",
+
     }
 });
 

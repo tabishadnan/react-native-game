@@ -15,11 +15,15 @@ export default function App() {
 
   const [isStartGame, setStartGame] = useState(false);
 
-  const [number, setNumber] = useState([]);
+  const [number, setNumber] = useState(null);
 
-  const [counter, setCounter] = useState(0);
+  const [userNum, setUserName] = useState([]);
 
   const [isGameOver, setGameOver] = useState(false);
+
+  const [sign, setSign] = useState("-");
+
+  const [counter, setCounter] = useState(0);
 
   const handleChange = (inputVal) => {
     setVal(inputVal);
@@ -29,21 +33,16 @@ export default function App() {
     setVal("");
   };
 
-  const genRandNum = (sign) => {
-    setCounter(counter + 1);
-    if (sign === "-") {
-      console.log("you press -");
-    } else {
-      console.log("you press +");
-    }
+  const genRandNum = () => {
+    let num = Math.floor(Math.random() * 99);  
+    setNumber(num); 
   };
 
-  useEffect(() => {
-    if (isStartGame) {
-      let num = Math.floor(Math.random() * 99);
-      setNumber([{ counter: counter, number: num }]);
-    }
-  }, [counter]);
+  const userGuessNum = () => {
+    setCounter(counter + 1);
+    let num = Math.floor(Math.random() * 99);  
+    setUserName([...userNum, {userNum : num, counter:counter}]);
+  };
 
   return (
     <View>
@@ -55,9 +54,13 @@ export default function App() {
         resetinputVal={resetinputVal}
         setisConfirm={setisConfirm}
       />
-      {!!isConfirm && <Game value={value} setStartGame={setStartGame} />}
+      {!!isConfirm && <Game value={value} setStartGame={setStartGame} genRandNum={genRandNum} />}
 
-      {!!isStartGame && <StartGame value={value} number={number} number={number} genRandNum={genRandNum} />}
+      {!!isStartGame && <StartGame value={value}
+        userNum={userNum}
+        userGuessNum={userGuessNum}
+        setSign={setSign}
+      />}
 
       {!!isGameOver && <GameOver gameOver={gameOver} />}
 
